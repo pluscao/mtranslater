@@ -1,5 +1,6 @@
 package com.shengc.mtranslater.utils;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.POIXMLTextExtractor;
@@ -12,6 +13,7 @@ import org.apache.xmlbeans.XmlException;
 import java.io.*;
 import java.util.ArrayList;
 
+import static com.shengc.mtranslater.utils.AsciiUtil.dbc2sbc;
 import static com.shengc.mtranslater.utils.ConsoleUtil.inputBack;
 import static com.shengc.mtranslater.utils.ConsoleUtil.print;
 
@@ -104,33 +106,41 @@ public class FileUtil {
      * @param data
      * @return
      */
-    protected static String horizontalToVertical(String data) {
+    protected static String horizontalToVertical(String data) throws UnsupportedEncodingException {
         // 行划分
         String[] splitDatas = data.split("\n");
         // 计算转换后的列数
         int columns = splitDatas.length;
         // 计算转换后的行数
         int rows = 0;
+        //将行字符串转成单字符后的存放列表
+        ArrayList<char[]> charArr = new ArrayList();
         for (String splitData : splitDatas) {
             if (splitData.length() > rows) {
                 rows = splitData.length();
             }
+            //每行字符串都转为字符数组，放入列表
+            charArr.add(splitData.toCharArray());
         }
         // 用于存放转换后数据的StringBuffer
         StringBuffer finalData = new StringBuffer();
+
         // 格式重排
         for (int i = 0; i < rows; i++) {
             for (int j = columns - 1; j >= 0; j--) {
                 if (i < splitDatas[j].length()){
-                    finalData.append(splitDatas[j].substring(i,i+1));
+                    //其实sub是一个char型字符
+                    char sub = charArr.get(j)[i];
+                    //存放全角字符（只有全角字符才可以对其）
+                    finalData.append(dbc2sbc(sub));
                 }else{
-                    // 居然要三个空格来对齐中文！
-                    finalData.append("&nbsp;&nbsp;&nbsp;");
+                    //中文全角空格字符！用来对其列
+                    finalData.append("　");
                 }
                 // 第一行不留白，要不右边多出一排空格
                 if (j != 0){
-                    // 留白贼好看
-                    finalData.append("&nbsp;&nbsp;");
+                    // 留白贼好看,半角空格留白（每列之间制造间距，使之有段落间隔的效果）
+                    finalData.append(" ");
                 }
             }
             finalData.append("\n");
@@ -139,16 +149,10 @@ public class FileUtil {
     }
 
 
-
     public static void main(String[] args) {
-        try {
-            readFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (OpenXML4JException e) {
-            e.printStackTrace();
-        } catch (XmlException e) {
-            e.printStackTrace();
-        }
+        System.out.println("你".length());
+        System.out.println(" ".length());
+        System.out.println("\t".length());
+        System.out.println("H".length());
     }
 }
