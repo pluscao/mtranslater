@@ -1,7 +1,5 @@
 package com.shengc.mtranslater.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -22,9 +20,8 @@ public class ConsoleUtil {
     /**
      * 获取用户在控制台输入的一行数据
      * @return
-     * @throws IOException
      */
-    public static String inputBack() throws IOException {
+    public static String inputBack(){
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }

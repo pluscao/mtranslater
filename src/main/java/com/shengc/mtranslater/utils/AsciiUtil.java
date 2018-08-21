@@ -1,6 +1,8 @@
 package com.shengc.mtranslater.utils;
 
 /**
+ * 全角字符与半角字符转换的util（unicode）
+ *
  * @author sc
  * @create 2018-08-21-9:45
  * @referurl https://segmentfault.com/a/1190000010841143

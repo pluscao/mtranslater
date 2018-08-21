@@ -1,7 +1,5 @@
 package com.shengc.mtranslater.utils;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
@@ -106,7 +104,7 @@ public class FileUtil {
      * @param data
      * @return
      */
-    protected static String horizontalToVertical(String data) throws UnsupportedEncodingException {
+    protected static String horizontalToVertical(String data) {
         // 行划分
         String[] splitDatas = data.split("\n");
         // 计算转换后的列数
