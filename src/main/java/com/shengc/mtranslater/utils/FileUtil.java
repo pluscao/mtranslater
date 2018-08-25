@@ -105,6 +105,16 @@ public class FileUtil {
      * @return
      */
     protected static String horizontalToVertical(String data) {
+
+        data = data.replaceAll("\\(","︵")
+                .replaceAll("\\)","︶")
+                .replaceAll("（","︵")
+                .replaceAll("）","︶")
+                .replaceAll("【","︻")
+                .replaceAll("】","︼")
+                .replaceAll("「","﹁")
+                .replaceAll("」","﹂")
+                .replaceAll("——","｜");
         // 行划分
         String[] splitDatas = data.split("\n");
         // 计算转换后的列数
