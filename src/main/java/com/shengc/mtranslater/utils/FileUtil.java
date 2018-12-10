@@ -148,6 +148,10 @@ public class FileUtil {
 
 
     public static void main(String[] args) {
+        //C:\Users\Administrator\Desktop\test.docx
+        //C:\Users\Administrator\Desktop\test.md
+
+        //测试 git cherry-pick 功能
         System.out.println("你".length());
         System.out.println(" ".length());
         System.out.println("\t".length());
