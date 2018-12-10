@@ -148,6 +148,7 @@ public class FileUtil {
 
 
     public static void main(String[] args) {
+        // tttttst
         System.out.println("你".length());
         System.out.println(" ".length());
         System.out.println("\t".length());
